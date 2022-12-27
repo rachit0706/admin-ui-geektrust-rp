@@ -1,0 +1,57 @@
+.admin-ui {
+    margin: 1rem auto 4rem auto;
+    width: 95%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom: 1px solid rgb(157, 157, 157);
+}
+
+th, td {
+    text-align: left;
+}
+
+thead th:nth-child(1) {
+    width: 18%;
+}
+
+thead th:nth-child(2) {
+    width: 25%;
+}
+
+thead th:nth-child(3) {
+    width: 25%;
+}
+
+thead th:nth-child(4) {
+    width: 15%;
+}
+
+thead th:nth-child(5) {
+    width: 18%;
+}
+
+
+.controls-area {
+    position: relative;
+    padding: .5rem;
+}
+
+.delete-selected-btn {
+    position: absolute;
+    top: .5rem;
+    left: 1rem;
+    border-radius: 1.2rem;
+    padding: .5rem;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: .7rem;
+}
+
+.delete-selected-btn:disabled {
+    filter: brightness(.7);
+}

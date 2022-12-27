@@ -1,0 +1,39 @@
+.navigation, .page-bubbles {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.navigation {
+    max-width: 60%;
+    margin: auto;
+}
+
+.page-bubbles {
+    gap: .5rem;
+}
+
+.navi-btn, .page-bubble {
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.page-bubble {
+    display: inline-block;
+    background-color: #22A7F0;
+    color: white;
+    border-radius: 50%;
+    padding: .3rem;
+    width: 2rem;
+}
+
+.selected-page {
+    border: 1px solid #22A7F0;
+    color: #22A7F0;
+    background-color: white;
+}
+
+.navi-btn {
+    border: 1px solid gray;
+}

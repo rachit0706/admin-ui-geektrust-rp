@@ -1,23 +1,16 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import AdminUi from './components/AdminUi/AdminUi';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Admin UI</h1>
+      <AdminUi />
+      <footer>
+        A challenge by <a href='https://www.geektrust.com/'>Geektrust</a>
+      </footer>
     </div>
   );
 }
