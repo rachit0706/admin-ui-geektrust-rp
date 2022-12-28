@@ -67,8 +67,8 @@ export default function AdminUi(props) {
     const fetchUsers = async (url) => {
         try {
             const response = await axios.get(url);
-            setFixedData(response.data);
             setUsers(response.data);
+            setFixedData(response.data);
         } catch (e) {
             alert(e);
         }
@@ -192,6 +192,7 @@ export default function AdminUi(props) {
         editedObj.role = newRole;
 
         setUsers(currUsers);
+        setFixedData(currUsers);
     };
 
     // Provides functionality to search bar.
