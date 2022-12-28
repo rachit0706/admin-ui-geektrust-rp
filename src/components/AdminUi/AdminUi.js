@@ -4,6 +4,7 @@ import "./AdminUi.css";
 import TableRow from "../TableRow/TableRow";
 import SearchBar from "../SearchBar/SearchBar";
 import Navigation from "../Navigation/Navigation";
+import { deleteHelper, deleteSelectedHelper, editHelper } from "../constants";
 
 const API_ENDPOINT = "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json";
 
@@ -101,12 +102,11 @@ export default function AdminUi(props) {
 
     // Deletes a single user. Called by the delete button present in the action column of each row.
     const handleDelete = (id) => {
-        const currUsers = [...users];
-        const idx = currUsers.findIndex(a => a.id === id);
-        currUsers.splice(idx, 1);
+        const newUsers = deleteHelper(id, users);
+        const newFixed = deleteHelper(id, fixedData);
 
-        setUsers(currUsers);
-        setFixedData(currUsers);
+        setUsers(newUsers);
+        setFixedData(newFixed);
 
         setCurrPage(prev => {
             if ((index.startIndex === index.endIndex) && (index.startIndex !== 0) && (currPage === totalPages)) {
@@ -119,14 +119,16 @@ export default function AdminUi(props) {
 
     // Deletes selected items. Called by the delete selected button.
     const handleDeleteSelected = () => {
-        const currUsers = [...users];
-        const toDelete = selectedValues;
-        const newUsers = currUsers.filter(user => !(toDelete.has(user.id)));
+        const newUsers = deleteSelectedHelper(users, selectedValues);
+        const newFixed = deleteSelectedHelper(fixedData, selectedValues);
 
+        // Unselecting all the selected items
         setSelectedValues(new Set());
         setMultiSelects(new Set());
+
         setUsers(newUsers);
-        setFixedData(newUsers);
+        setFixedData(newFixed);
+
         setCurrPage(prev => {
             if (prev === totalPages && prev !== 1) return prev - 1;
 
@@ -183,16 +185,11 @@ export default function AdminUi(props) {
 
     // Takes the current id of the edited element and the rest of the new data and then updates the users array.
     const handleEdit = (id, newName, newEmail, newRole) => {
-        const currUsers = [...users];
-        const position = currUsers.findIndex(a => a.id === id);
+        const newUsers = editHelper(id, users, newName, newEmail, newRole);
+        const newFixed = editHelper(id, fixedData, newName, newEmail, newRole);
 
-        const editedObj = currUsers[position];
-        editedObj.name = newName;
-        editedObj.email = newEmail;
-        editedObj.role = newRole;
-
-        setUsers(currUsers);
-        setFixedData(currUsers);
+        setUsers(newUsers);
+        setFixedData(newFixed);
     };
 
     // Provides functionality to search bar.
@@ -232,7 +229,8 @@ export default function AdminUi(props) {
                 <tbody>
                     {filteredUsers.map((user, index) => {
                         if (typeof user === 'undefined') {
-                            return <TableRow userData={user} key={totalPages * 10 * (index + 1)} />
+                            // I have put key={10000 * (index + 1)} to avoid conflicting key issue which was evident while search a user 
+                            return <TableRow userData={user} key={10000 * (index + 1)} />
                         }
                         return <TableRow userData={user} key={user.id} handleDelete={handleDelete} handleSelect={handleSelect} selectedValues={selectedValues} handleEdit={handleEdit} />;
                     })}
