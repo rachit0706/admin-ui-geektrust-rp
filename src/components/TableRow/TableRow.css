@@ -8,6 +8,10 @@
     height: 1.6rem;
 }
 
+.selected-row {
+    background-color: #ccd5db;
+}
+
 .user-data-row::after , .user-empty-row::after{
     content: '';
     display: block;

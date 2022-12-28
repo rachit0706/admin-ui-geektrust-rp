@@ -3,6 +3,15 @@ import "./TableRow.css";
 import DeleteOutlineRoundedIcon from '@mui/icons-material/DeleteOutlineRounded';
 import BorderColorRoundedIcon from '@mui/icons-material/BorderColorRounded';
 
+/**
+ * @typedef {object} userData - Data on the users on each row
+ * 
+ * @property {string} id - Id which is a number but present in the string form
+ * @property {string} name - Name of the user
+ * @property {string} email - Email of the user
+ * @property {string} role - Role of the user - can be either "member" or "admin"
+ */
+
 export default function TableRow({ userData, handleDelete, handleSelect, selectedValues, handleEdit }) {
     const [cellData, setCellData] = useState({
         id: userData ? userData.id : "",
@@ -52,7 +61,7 @@ export default function TableRow({ userData, handleDelete, handleSelect, selecte
                     <td></td>
                 </tr >
             ) : (
-                <tr className="user-data-row">
+                <tr className={selectedValues.has(userData.id) ? "user-data-row selected-row" : "user-data-row"}>
                     {!isEditing ? (
                         <>
                             <td><input type="checkbox" checked={selectedValues.has(userData.id)} onChange={() => handleSelect(cellData.id)} /></td>
